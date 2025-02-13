@@ -1,10 +1,10 @@
-const Joi = require("joi");
+// middleware/validateProduct.js
+const Joi = require('joi');
 
 const productSchema = Joi.object({
   name: Joi.string().min(3).max(100).required(),
   description: Joi.string().min(10).required(),
   price: Joi.number().positive().precision(2).required(),
-  imageUrl: Joi.string().uri().required()
 });
 
 const validateProduct = (req, res, next) => {

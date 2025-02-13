@@ -1,11 +1,12 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
-const ProductSchema = new mongoose.Schema({
-  title: { type: String, required: true },
+const productSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  description: { type: String, required: true },
   price: { type: Number, required: true },
-  image: { type: String, required: true },
-  stock: { type: Number, required: true, default: 1 },
-  category: { type: String, required: true },
+  imageUrl: { type: String, required: true }, // Store the Cloudinary image URL
 });
 
-module.exports = mongoose.model("Product", ProductSchema);
+const Product = mongoose.model('Product', productSchema);
+
+module.exports = Product;
