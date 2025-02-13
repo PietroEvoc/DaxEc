@@ -5,14 +5,25 @@ const CartContext = createContext();
 
 // CartContext provider component
 export const CartProvider = ({ children }) => {
-  const [cartItems, setCartItems] = useState([]);
+  const [cartItems, setCartItemsState] = useState(() => {
+    const savedCart = localStorage.getItem("cartItems");
+    return savedCart ? JSON.parse(savedCart) : [];
+  });
 
   const addToCart = (product) => {
-    setCartItems([...cartItems, product]);
+    setCartItemsState((prevItems) => {
+      const newCartItems = [...prevItems, product];
+      localStorage.setItem("cartItems", JSON.stringify(newCartItems)); // Save to localStorage
+      return newCartItems;
+    });
   };
 
   const removeFromCart = (productId) => {
-    setCartItems(cartItems.filter(item => item.id !== productId));
+    setCartItemsState((prevItems) => {
+      const newCartItems = prevItems.filter(item => item.id !== productId);
+      localStorage.setItem("cartItems", JSON.stringify(newCartItems)); // Save to localStorage
+      return newCartItems;
+    });
   };
 
   return (

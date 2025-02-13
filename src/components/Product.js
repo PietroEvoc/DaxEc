@@ -6,6 +6,7 @@ import GraffitiGunsImage from '../assets/GraffitiGuns.JPG'; // Import the image
 const Product = ({ product }) => {
   const { addToCart } = useCart(); // Access addToCart from context
 
+  // Handle adding product to the cart
   const handleAddToCart = () => {
     addToCart(product); // Add product to cart
   };
