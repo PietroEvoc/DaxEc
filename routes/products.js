@@ -1,12 +1,15 @@
 const express = require('express');
-const upload = require('../utils/multer');
-const { getProducts, addProduct } = require('../controllers/productController');  // Correct the method name here
-const validateProduct = require('../middleware/validateProduct');
+const upload = require('../utils/multer');  // Import multer middleware for file uploads
+const { getProducts, addProduct } = require('../controllers/productController');  // Import controller functions
+const validateProduct = require('../middleware/validateProduct');  // Import validation middleware
 
 const router = express.Router();
 
 // Routes for Products
-router.get('/', getProducts);  // Ensure this is using getProducts, not getAllProducts
-router.post('/', upload.single('image'), validateProduct, addProduct);
+router.get('/', getProducts);  // GET all products
+
+// POST route for adding a new product
+// Validation happens first, then file upload and product creation
+router.post('/', validateProduct, upload.single('image'), addProduct);  // Add new product
 
 module.exports = router;

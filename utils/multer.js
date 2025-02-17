@@ -1,9 +1,33 @@
-// utils/multer.js
 const multer = require('multer');
+const path = require('path');
 
-// Memory storage to buffer image for Cloudinary upload
-const storage = multer.memoryStorage();
+// Storage configuration for Multer
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads/');
+  },
+  filename: (req, file, cb) => {
+    cb(null, `${Date.now()}-${file.originalname}`);
+  },
+});
 
-const upload = multer({ storage: storage });
+// File filter to allow image uploads only
+const fileFilter = (req, file, cb) => {
+  const fileTypes = /jpeg|jpg|png|gif/;
+  const extname = fileTypes.test(path.extname(file.originalname).toLowerCase());
+  const mimetype = fileTypes.test(file.mimetype);
+
+  if (mimetype && extname) {
+    cb(null, true);
+  } else {
+    cb('Error: Images Only!');
+  }
+};
+
+// Initialize Multer
+const upload = multer({
+  storage,
+  fileFilter,
+});
 
 module.exports = upload;
