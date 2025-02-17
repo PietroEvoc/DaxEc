@@ -8,24 +8,17 @@ const AddProduct = () => {
     price: '',
     image: null,
   });
-
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setProduct((prevProduct) => ({
-      ...prevProduct,
-      [name]: value,
-    }));
-  };
-
-  const handleFileChange = (e) => {
-    setProduct((prevProduct) => ({
-      ...prevProduct,
-      image: e.target.files[0],
-    }));
+    const { name, value, type, files } = e.target;
+    if (type === 'file') {
+      setProduct({ ...product, [name]: files[0] });
+    } else {
+      setProduct({ ...product, [name]: value });
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -41,7 +34,7 @@ const AddProduct = () => {
     formData.append('image', product.image);
 
     try {
-      const response = await axios.post('http://localhost:5001/api/products', formData, {//changed 3000 for 5001
+      const response = await axios.post('http://localhost:5001/api/products', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -62,65 +55,84 @@ const AddProduct = () => {
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold mb-6 text-center">Add New Product</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="mb-4">
+    <div className="max-w-2xl mx-auto p-8 bg-white rounded-lg shadow-xl">
+      <h2 className="text-4xl font-extrabold text-center text-indigo-600 mb-8">Add a New Product</h2>
+
+      {success && <p className="text-green-500 text-center mb-4">Product added successfully!</p>}
+      {error && <p className="text-red-500 text-center mb-4">{error}</p>}
+
+      <form onSubmit={handleSubmit} className="space-y-6">
+        <div className="space-y-2">
+          <label htmlFor="name" className="block text-lg font-semibold text-gray-800">Name</label>
           <input
             type="text"
+            id="name"
             name="name"
             value={product.name}
             onChange={handleChange}
-            placeholder="Product Name"
-            className="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
+            className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 text-lg"
           />
         </div>
 
-        <div className="mb-4">
+        <div className="space-y-2">
+          <label htmlFor="description" className="block text-lg font-semibold text-gray-800">Description</label>
           <textarea
+            id="description"
             name="description"
             value={product.description}
             onChange={handleChange}
-            placeholder="Product Description"
-            className="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
+            className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 text-lg"
           />
         </div>
 
-        <div className="mb-4">
+        <div className="space-y-2">
+          <label htmlFor="price" className="block text-lg font-semibold text-gray-800">Price</label>
           <input
             type="number"
+            id="price"
             name="price"
             value={product.price}
             onChange={handleChange}
-            placeholder="Product Price"
-            className="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
+            className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 text-lg"
           />
         </div>
 
-        <div className="mb-6">
+        <div className="space-y-2">
+          <label htmlFor="image" className="block text-lg font-semibold text-gray-800">Product Image</label>
           <input
             type="file"
+            id="image"
             name="image"
-            onChange={handleFileChange}
-            className="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            onChange={handleChange}
             required
+            className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 text-lg"
           />
         </div>
 
-        <button
-          type="submit"
-          disabled={loading}
-          className="w-full bg-blue-500 text-white p-3 rounded-md shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 disabled:opacity-50"
-        >
-          {loading ? 'Adding Product...' : 'Add Product'}
-        </button>
-      </form>
+        {product.image && (
+          <div className="mt-4">
+            <h3 className="text-lg font-semibold text-gray-800">Image Preview:</h3>
+            <img
+              src={URL.createObjectURL(product.image)}
+              alt="Product Preview"
+              className="mt-2 w-full h-64 object-cover rounded-lg shadow-md"
+            />
+          </div>
+        )}
 
-      {success && <p className="mt-4 text-green-500 text-center">Product added successfully!</p>}
-      {error && <p className="mt-4 text-red-500 text-center">{error}</p>}
+        <div className="text-center">
+          <button 
+            type="submit" 
+            disabled={loading}
+            className="w-full p-4 mt-6 bg-indigo-600 text-white text-lg rounded-lg hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500"
+          >
+            {loading ? 'Adding...' : 'Add Product'}
+          </button>
+        </div>
+      </form>
     </div>
   );
 };
