@@ -1,10 +1,9 @@
-// server.js
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const mongoose = require('mongoose');
 require('dotenv').config();
-const productRoutes = require('./routes/products'); // Changed to 'products' route
+const userRoutes = require('./routes/users'); // Import user routes
 
 const app = express();
 
@@ -14,7 +13,7 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
-app.use('/api/products', productRoutes); // Changed from 'uploadRoutes' to 'productRoutes'
+app.use('/api/users', userRoutes); // Make sure this matches the endpoint you're testing
 
 app.get('/', (req, res) => {
   res.send('DaxDudes API is running! 🚀');
@@ -33,11 +32,5 @@ mongoose
   .then(() => console.log('✅ MongoDB Connected'))
   .catch((err) => console.error('❌ MongoDB Connection Error:', err));
 
-// Error Handling
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({ error: 'Internal Server Error' });
-});
-
 const PORT = process.env.PORT || 5001;
-app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(` Server running on port ${PORT}`));
