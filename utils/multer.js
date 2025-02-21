@@ -1,33 +1,23 @@
 const multer = require('multer');
 const path = require('path');
 
-// Storage configuration for Multer
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'uploads/');
+    cb(null, 'uploads/'); // Save temporarily before uploading to Cloudinary
   },
   filename: (req, file, cb) => {
-    cb(null, `${Date.now()}-${file.originalname}`);
-  },
+    cb(null, Date.now() + path.extname(file.originalname)); // Unique file name
+  }
 });
 
-// File filter to allow image uploads only
 const fileFilter = (req, file, cb) => {
-  const fileTypes = /jpeg|jpg|png|gif/;
-  const extname = fileTypes.test(path.extname(file.originalname).toLowerCase());
-  const mimetype = fileTypes.test(file.mimetype);
-
-  if (mimetype && extname) {
+  if (file.mimetype.startsWith('image/')) {
     cb(null, true);
   } else {
-    cb('Error: Images Only!');
+    cb(new Error('Only images are allowed!'), false);
   }
 };
 
-// Initialize Multer
-const upload = multer({
-  storage,
-  fileFilter,
-});
+const upload = multer({ storage, fileFilter });
 
 module.exports = upload;

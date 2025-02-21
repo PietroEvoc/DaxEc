@@ -7,11 +7,13 @@ const productSchema = Joi.object({
   price: Joi.number().positive().precision(2).required(),
 });
 
-// Validate the product before upload
 const validateProduct = (req, res, next) => {
-  // Check if file is uploaded, we skip validation for the file here
+  console.log("Request Body:", req.body); // Log the request body
+  console.log("Request File:", req.file); // Log the uploaded file
+
+  // Ensure req.body is populated (multer should handle this)
   if (!req.body.name || !req.body.description || !req.body.price) {
-    return res.status(400).json({ error: 'All fields (name, description, price) are required' });
+    return res.status(400).json({ error: "Missing required fields" });
   }
 
   const { error } = productSchema.validate(req.body);

@@ -1,19 +1,20 @@
-// controllers/productController.js
 const cloudinary = require('cloudinary').v2;
 const Product = require('../models/Product');  // Import the Product model
 
+// Configure Cloudinary (Ensure these are in your .env file)
 cloudinary.config({
-  cloud_name: process.env.CLOUD_NAME,
-  api_key: process.env.CLOUD_API_KEY,
-  api_secret: process.env.CLOUD_API_SECRET,
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-// Get all products (if needed)
+// Get all products
 const getProducts = async (req, res) => {
   try {
-    const products = await Product.find();
+    const products = await Product.find();  // Fetch all products
     res.status(200).json(products);
   } catch (error) {
+    console.error('Error fetching products:', error);
     res.status(500).json({ error: 'Failed to fetch products' });
   }
 };
@@ -23,10 +24,20 @@ const addProduct = async (req, res) => {
   try {
     const { name, description, price } = req.body;
 
+    // Check if file is received
+    console.log('Uploaded File:', req.file);
+
+    // Validate required fields
+    // if (!name || !description || !price || !req.file) {
+    //   return res.status(400).json({ error: 'Missing required fields (name, description, price, or image)' });
+    // }
+
     // Upload the image to Cloudinary
     const result = await cloudinary.uploader.upload(req.file.path, {
       folder: 'products',
     });
+
+    console.log('Cloudinary Result:', result);
 
     // Create a new product in the database
     const product = new Product({

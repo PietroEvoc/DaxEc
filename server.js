@@ -20,6 +20,8 @@ cloudinary.config({
 
 console.log('Cloudinary Configured:', process.env.CLOUD_NAME); // Log Cloudinary config to check if it is correct
 
+app.use(express.urlencoded({ extended: true }));  // For form data
+
 // Middleware
 app.use(helmet());
 app.use(cors());
