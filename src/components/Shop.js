@@ -1,29 +1,30 @@
-// Example usage in Shop.js
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Product from './Product';
 
 const Shop = () => {
-  const products = [
-    {
-      id: 1,
-      name: 'Product 1',
-      description: 'This is a great product.',
-      image: '/path/to/image.jpg', // Ensure this path is correct
-    },
-    {
-      id: 2,
-      name: 'Product 2',
-      description: 'Another awesome product.',
-      image: '/path/to/image.jpg', // Ensure this path is correct
-    },
-    // Add more products here
-  ];
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch('http://localhost:5001/api/products'); // Adjust the URL if necessary
+        const data = await response.json();
+        setProducts(data);
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      }
+    };
+
+    fetchProducts();
+  }, []);
 
   return (
     <div className="shop grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 p-4">
-      {products.map((product) => (
-        <Product key={product.id} product={product} />
-      ))}
+      {products.length > 0 ? (
+        products.map((product) => <Product key={product._id} product={product} />)
+      ) : (
+        <p className="text-center col-span-full">No products available</p>
+      )}
     </div>
   );
 };

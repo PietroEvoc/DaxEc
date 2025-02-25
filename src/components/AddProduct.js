@@ -31,7 +31,14 @@ const AddProduct = () => {
     formData.append('name', product.name);
     formData.append('description', product.description);
     formData.append('price', product.price);
-    formData.append('image', product.image);
+    if (product.image) {
+      formData.append('image', product.image);
+    }
+
+    // Log form data for debugging
+    for (let pair of formData.entries()) {
+      console.log(pair[0] + ': ' + pair[1]);
+    }
 
     try {
       const response = await axios.post('http://localhost:5001/api/products', formData, {
@@ -47,6 +54,9 @@ const AddProduct = () => {
         price: '',
         image: null,
       });
+
+      // Reset file input field
+      document.getElementById('image').value = '';
     } catch (err) {
       setError('Failed to add product. Please try again later.');
     } finally {

@@ -12,17 +12,17 @@ const Product = ({ product }) => {
   };
 
   // Set a default image if the product doesn't have one
-  const getProductImage = (productName) => {
-    if (productName === 'Da Hopper') return DaHopperImage;
-    if (productName === 'Graffiti Guns') return GraffitiGunsImage;
-    return ''; // Return a default or placeholder image if needed
+  const getProductImage = (product) => {
+    if (product.name === 'Da Hopper') return DaHopperImage;
+    if (product.name === 'Graffiti Guns') return GraffitiGunsImage;
+    return product.imageUrl || 'https://via.placeholder.com/150';  // Use Cloudinary URL or placeholder
   };
 
   return (
     <div className="product border border-gray-300 rounded-lg shadow-lg p-4 transition-all hover:shadow-xl hover:scale-105">
       {/* Product Image */}
       <img 
-        src={getProductImage(product.name)} 
+        src={getProductImage(product)} 
         alt={product.name} 
         className="w-full h-48 object-cover rounded-md mb-4 transition-transform transform hover:scale-110"
       />
