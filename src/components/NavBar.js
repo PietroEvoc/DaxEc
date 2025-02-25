@@ -1,7 +1,7 @@
 // src/components/NavBar.js
 import React from 'react';
 import { Link } from 'react-router-dom';
-import DaxTag from '../assets/DaxTag.png'; // Assuming you have a logo
+import DaxTag from '../assets/logoDax.jpg'; 
 
 const NavBar = () => {
   return (
