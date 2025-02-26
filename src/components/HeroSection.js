@@ -34,16 +34,16 @@ const HeroSection = () => {
           />
 
           {/* Left Container (Below Dax Graff Pink) */}
-          <div className="w-full max-w-[450px] lg:max-w-[700px] border-2 border-dashed border-gray-500 p-8 text-black text-center mt-4 mx-auto lg:mx-0">
-            <h1>Bring Your Vision to Life!</h1>
-            <p>Together, we’ll craft a masterpiece tailored just for you. Let’s dream, create, and make it real.</p>
+          <div className="w-full max-w-[450px] lg:max-w-[700px] bg-gradient-to-r from-purple-500 to-pink-500 border-2 border-solid border-gray-900 p-8 text-white text-center mt-4 mx-auto lg:mx-0 rounded-lg shadow-lg">
+            <h1 className="font-heading text-4xl">Bring Your Vision to Life!</h1>
+            <p className="font-body text-lg">Together, we’ll craft a masterpiece tailored just for you. Let’s dream, create, and make it real.</p>
           </div>
         </div>
 
         {/* Right Container (To the right of Dax Graff Pink) */}
-        <div className="flex-grow w-full lg:w-[700px] max-w-[700px] border-2 border-dashed border-gray-500 p-8 text-black text-center lg:ml-4 mx-auto lg:mx-0">
-          <h1>From Imagination to Art!</h1>
-          <p>Whether it’s a painting, 3D design, character, or collectible, let’s collaborate and turn your ideas into something extraordinary.</p>
+        <div className="flex-grow w-full lg:w-[700px] max-w-[700px] bg-gradient-to-r from-purple-500 to-pink-500 border-2 border-solid border-gray-900 p-8 text-white text-center lg:ml-4 mx-auto lg:mx-0 rounded-lg shadow-lg">
+          <h1 className="font-heading text-4xl">From Imagination to Art!</h1>
+          <p className="font-body text-lg">Whether it’s a painting, 3D design, character, or collectible, let’s collaborate and turn your ideas into something extraordinary.</p>
         </div>
       </div>
     </section>

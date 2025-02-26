@@ -13,10 +13,10 @@ const NavBar = () => {
           </Link>
         </div>
         <div className="flex items-center space-x-6">
-          <Link to="/" className="mr-4 hover:text-gray-400">Home</Link>
-          <Link to="/shop" className="mr-4 hover:text-gray-400">Shop</Link>
-          <Link to="/about" className="mr-4 hover:text-gray-400">About</Link>
-          <Link to="/cart" className="mr-4 hover:text-gray-400">Cart</Link>
+          <Link to="/" className="mr-4 hover:text-gray-400 font-heading text-4xl">Home</Link>
+          <Link to="/shop" className="mr-4 hover:text-gray-400 font-heading text-4xl">Shop</Link>
+          <Link to="/about" className="mr-4 hover:text-gray-400 font-heading text-4xl">About</Link>
+          <Link to="/cart" className="mr-4 hover:text-gray-400 font-heading text-4xl">Cart</Link>
         </div>
       </div>
     </nav>
