@@ -8,6 +8,7 @@ require('dotenv').config();
 const userRoutes = require('./routes/users');
 const cartRoutes = require('./routes/cartRoutes');
 const productRoutes = require('./routes/products'); // Add this line
+const messageRoutes = require('./routes/messages');
 
 const app = express();
 
@@ -30,7 +31,8 @@ app.use(express.json());
 // Routes
 app.use('/api/users', userRoutes);
 app.use('/api/cart', cartRoutes);
-app.use('/api/products', productRoutes); // Add this line
+app.use('/api/products', productRoutes);
+app.use('/api/messages', messageRoutes);
 
 app.get('/', (req, res) => {
   res.send('DaxDudes API is running! 🚀');
