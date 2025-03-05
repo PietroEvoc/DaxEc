@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import DaxBanner from '../assets/DaxBanner.png'; // Banner Image
 import ChillinxImage from '../assets/DDV2_Chillinx 1920.5_1080x1920.png'; // Left Image
 import DaxGraffPink from '../assets/DaxGraff_Pink_782x412.png'; // Centered Image
+import Chat from './Chat'; // Import Chat Component
 
-const HeroSection = () => {
+const HeroSection = ({ userEmail }) => {
+  const [showChat, setShowChat] = useState(false);
+
   return (
     <section className="bg-white text-white min-h-screen flex flex-col">
       {/* Banner */}
@@ -45,6 +48,21 @@ const HeroSection = () => {
           <h1 className="font-heading text-4xl">From Imagination to Art!</h1>
           <p className="font-body text-lg">Whether it’s a painting, 3D design, character, or collectible, let’s collaborate and turn your ideas into something extraordinary.</p>
         </div>
+      </div>
+
+      {/* Separate Container for "Request Custom Art" Button */}
+      <div className="w-full max-w-[700px] bg-gradient-to-r from-black to-gray-800 border-2 border-solid border-gray-900 p-8 text-white text-center mt-4 mx-auto rounded-lg shadow-lg">
+        <h2 className="font-heading text-3xl mb-2">Want a Custom Piece?</h2>
+        <p className="font-body text-lg mb-4">Get in touch with the artist to discuss your ideas and bring them to life.</p>
+        <button 
+          onClick={() => setShowChat(!showChat)} 
+          className="bg-white text-black px-6 py-3 rounded-lg text-lg font-body shadow-lg hover:bg-gray-300 transition duration-300"
+        >
+          Request Custom Art
+        </button>
+
+        {/* Chat Component (Appears when button is clicked) */}
+        {showChat && <Chat userEmail={userEmail} />}
       </div>
     </section>
   );
