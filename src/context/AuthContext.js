@@ -6,6 +6,7 @@ const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true); // Add loading state to handle async authentication flow
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -13,21 +14,25 @@ const AuthProvider = ({ children }) => {
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       axios.get('http://localhost:5001/api/users/profile')
         .then(res => {
-          setUser(res.data);
+          const fetchedUser = res.data;
+          setUser(fetchedUser);
           setIsAuthenticated(true);
-          localStorage.setItem("user", JSON.stringify(res.data)); // Store user data
+          localStorage.setItem("user", JSON.stringify(fetchedUser));
         })
         .catch(() => {
           localStorage.removeItem('token');
           localStorage.removeItem('user');
           setIsAuthenticated(false);
-        });
+        })
+        .finally(() => setLoading(false)); // Set loading to false after API call
+    } else {
+      setLoading(false); // If no token, finish loading
     }
   }, []);
 
   const login = (token, userData) => {
     localStorage.setItem('token', token);
-    localStorage.setItem("user", JSON.stringify(userData)); // Store user data
+    localStorage.setItem("user", JSON.stringify(userData));
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     setUser(userData);
     setIsAuthenticated(true);
@@ -42,7 +47,7 @@ const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, user, login, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated, user, login, logout, loading }}>
       {children}
     </AuthContext.Provider>
   );
