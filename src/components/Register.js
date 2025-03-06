@@ -15,7 +15,6 @@ const Register = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     
-    // Basic validation
     if (!name || !email || !password || !confirmPassword) {
       setError("Please fill in all fields");
       return;
@@ -26,9 +25,6 @@ const Register = () => {
     }
     setError("");
 
-    // Log the data being sent to the server for debugging
-    console.log({ name, email, password });
-
     try {
       const response = await axios.post(
         "http://localhost:5001/api/users/register", 
@@ -38,7 +34,6 @@ const Register = () => {
       login(response.data.token, response.data.user);
       navigate("/profile");
     } catch (error) {
-      // Log the error response for debugging
       console.error("Error response:", error.response);
       setError(error.response?.data?.message || "Registration failed");
     }
@@ -82,6 +77,14 @@ const Register = () => {
             Register
           </button>
         </form>
+
+        {/* Back to Login Button */}
+        <p className="text-center mt-4 text-gray-600">
+          Already have an account?{" "}
+          <button onClick={() => navigate("/login")} className="text-blue-500 hover:underline">
+            Log In
+          </button>
+        </p>
       </div>
     </div>
   );

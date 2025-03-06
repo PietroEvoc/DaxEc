@@ -1,4 +1,3 @@
-// src/components/Login.js
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -37,6 +36,14 @@ const Login = () => {
           <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="w-full p-3 mb-4 border rounded-lg" placeholder="Password" />
           <button className="w-full bg-blue-500 text-white py-3 rounded-lg hover:bg-blue-600">Login</button>
         </form>
+
+        {/* Register Button */}
+        <p className="text-center mt-4 text-gray-600">
+          Don't have an account?{" "}
+          <button onClick={() => navigate("/register")} className="text-blue-500 hover:underline">
+            Sign Up
+          </button>
+        </p>
       </div>
     </div>
   );

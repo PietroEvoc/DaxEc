@@ -15,9 +15,11 @@ const AuthProvider = ({ children }) => {
         .then(res => {
           setUser(res.data);
           setIsAuthenticated(true);
+          localStorage.setItem("user", JSON.stringify(res.data)); // Store user data
         })
         .catch(() => {
           localStorage.removeItem('token');
+          localStorage.removeItem('user');
           setIsAuthenticated(false);
         });
     }
@@ -25,6 +27,7 @@ const AuthProvider = ({ children }) => {
 
   const login = (token, userData) => {
     localStorage.setItem('token', token);
+    localStorage.setItem("user", JSON.stringify(userData)); // Store user data
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     setUser(userData);
     setIsAuthenticated(true);
@@ -32,6 +35,7 @@ const AuthProvider = ({ children }) => {
 
   const logout = () => {
     localStorage.removeItem('token');
+    localStorage.removeItem('user');
     delete axios.defaults.headers.common['Authorization'];
     setUser(null);
     setIsAuthenticated(false);
@@ -44,7 +48,6 @@ const AuthProvider = ({ children }) => {
   );
 };
 
-// Custom hook to access the Auth context
 const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {

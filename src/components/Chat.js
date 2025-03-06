@@ -1,41 +1,60 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import axios from "axios";
+import { AuthContext } from "../context/AuthContext";
 
 const Chat = () => {
+  const { user } = useContext(AuthContext);
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
 
-  const handleChange = (e) => {
-    console.log("Input value changed:", e.target.value);  // Log input value
-    setInput(e.target.value);  // Update the input state
+  useEffect(() => {
+    if (user) {
+      fetchMessages();
+    }
+  }, [user]);
+
+  const fetchMessages = async () => {
+    try {
+      const response = await axios.get(`http://localhost:5001/api/messages/conversation/${user.email}`);
+      setMessages(response.data);
+    } catch (error) {
+      console.error("Error fetching messages:", error);
+    }
   };
 
-  const handleSendMessage = () => {
+  const handleSendMessage = async () => {
     if (input.trim() === "") return;
 
-    setMessages([...messages, { user: "You", text: input }]);
-    setInput(""); // Clear input field after sending
+    const newMessage = { sender: user.email, recipient: "artist@example.com", content: input };
+
+    try {
+      await axios.post("http://localhost:5001/api/messages/send", newMessage);
+      setMessages([...messages, newMessage]);
+      setInput("");
+    } catch (error) {
+      console.error("Error sending message:", error);
+    }
   };
 
   return (
     <div className="w-full max-w-md mx-auto bg-white p-4 rounded-lg shadow-lg">
-      {/* Chat Messages Display */}
       <div className="h-[250px] overflow-y-auto border p-2 mb-2 bg-gray-100 rounded-md flex flex-col gap-2">
         {messages.map((msg, index) => (
-          <div key={index} className="flex items-start">
-            <span className="font-bold text-gray-700 mr-2">{msg.user}:</span>
-            <span className="text-gray-800">{msg.text}</span>
+          <div key={index} className={`flex ${msg.sender === user.email ? "justify-end" : "justify-start"}`}>
+            <span className={`p-2 rounded-lg ${msg.sender === user.email ? "bg-blue-500 text-white" : "bg-gray-300 text-black"}`}>
+              {msg.content}
+            </span>
           </div>
         ))}
       </div>
 
-      {/* Chat Input Field */}
       <div className="flex items-center gap-2">
         <input
           type="text"
           className="flex-1 p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 bg-white text-black"
           placeholder="Type your message..."
           value={input}
-          onChange={handleChange}
+          onChange={(e) => setInput(e.target.value)}
         />
         <button
           onClick={handleSendMessage}
