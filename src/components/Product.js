@@ -30,6 +30,13 @@ const Product = ({ product }) => {
       {/* Product Name */}
       <h3 className="text-xl font-semibold mb-2 text-gray-800">{product.name}</h3>
       
+      {/* Product Price */}
+      {product.price !== undefined ? (
+        <p className="text-lg font-bold text-gray-700 mb-2">${product.price.toFixed(2)}</p>
+      ) : (
+        <p className="text-red-500 font-semibold">Price not available</p>
+      )}
+
       {/* Product Description */}
       <p className="text-gray-600 text-sm mb-4">{product.description}</p>
 
