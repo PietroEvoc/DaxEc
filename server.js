@@ -4,7 +4,6 @@ const cors = require('cors');
 const helmet = require('helmet');
 const mongoose = require('mongoose');
 const cloudinary = require('cloudinary').v2; // Add Cloudinary
-require('dotenv').config();
 const userRoutes = require('./routes/users');
 const cartRoutes = require('./routes/cartRoutes');
 const productRoutes = require('./routes/products'); // Add this line

@@ -13,7 +13,7 @@ router.post('/send', async (req, res) => {
 
     const message = new Message({ sender, recipient, content });
     await message.save();
-    res.status(201).json({ message: "Message sent successfully!" });
+    res.status(201).json({ message: "Message sent successfully!", messageData: message });
 
   } catch (error) {
     res.status(500).json({ message: "Server error", error });
