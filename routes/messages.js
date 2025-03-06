@@ -1,9 +1,9 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const Message = require('../models/Message');
+const Message = require("../models/Message");
 
 // Send a message
-router.post('/send', async (req, res) => {
+router.post("/send", async (req, res) => {
   try {
     const { sender, recipient, content } = req.body;
 
@@ -14,18 +14,17 @@ router.post('/send', async (req, res) => {
     const message = new Message({ sender, recipient, content });
     await message.save();
     res.status(201).json({ message: "Message sent successfully!", messageData: message });
-
   } catch (error) {
     res.status(500).json({ message: "Server error", error });
   }
 });
 
 // Get conversation messages between a user and the artist
-router.get('/conversation/:email', async (req, res) => {
+router.get("/conversation/:email", async (req, res) => {
   try {
     const { email } = req.params;
     const messages = await Message.find({
-      $or: [{ sender: email }, { recipient: email }]
+      $or: [{ sender: email }, { recipient: email }],
     }).sort({ createdAt: 1 });
 
     res.json(messages);
