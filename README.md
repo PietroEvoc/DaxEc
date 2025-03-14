@@ -39,6 +39,12 @@ Frontend:
 	•	Tailwind CSS (for styling)
 	•	Vercel (for deployment)
 
+ <img width="1459" alt="image" src="https://github.com/user-attachments/assets/07d0382e-0a4f-4639-961d-3230628cc22b" />
+ <img width="1459" alt="image" src="https://github.com/user-attachments/assets/a40b3e99-e7a9-4033-a4ae-3e9a1d40cdaf" />
+ <img width="543" alt="image" src="https://github.com/user-attachments/assets/fb7e9e48-a75a-460a-912d-e0f35ccd9b63" />
+
+
+
 Backend:
 	•	Node.js + Express
 	•	MongoDB (Database)
