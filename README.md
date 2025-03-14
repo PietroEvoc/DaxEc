@@ -51,34 +51,8 @@ Additional Services:
 
 Project Structure
 
-📦 daxDudes
- ┣ 📂 daxdudes-frontend (React Frontend)
- ┃ ┣ 📂 src
- ┃ ┃ ┣ 📂 components (Navbar, Shop, HeroSection, etc.)
- ┃ ┃ ┣ 📂 context (State management)
- ┃ ┃ ┣ 📜 App.js
- ┃ ┃ ┣ 📜 index.js
- ┃ ┃ ┣ 📜 index.css
- ┃ ┃ ┗ 📂 assets (Images, icons, etc.)
- ┃ ┣ 📜 tailwind.config.js
- ┃ ┗ 📜 package.json
- ┣ 📂 daxdudes-backend (Node.js Backend)
- ┃ ┣ 📂 config (Database connection, environment variables)
- ┃ ┣ 📂 controllers (Handles API logic)
- ┃ ┣ 📂 middleware (Auth, validation, etc.)
- ┃ ┣ 📂 models (User, Product, Cart, Admin, etc.)
- ┃ ┣ 📂 routes (API routes)
- ┃ ┃ ┣ 📜 admin.js
- ┃ ┃ ┣ 📜 cartRoutes.js
- ┃ ┃ ┣ 📜 messages.js
- ┃ ┃ ┣ 📜 products.js
- ┃ ┃ ┣ 📜 uploadRoute.js
- ┃ ┃ ┗ 📜 users.js
- ┃ ┣ 📂 utils (Helper functions)
- ┃ ┣ 📜 server.js (Main backend entry point)
- ┃ ┗ 📜 package.json
- ┣ 📜 .env (Environment variables)
- ┗ 📜 README.md
+<img width="535" alt="image" src="https://github.com/user-attachments/assets/0ba806cd-1804-4728-9518-7562d50b275b" />
+
 
 Setup & Installation
 
