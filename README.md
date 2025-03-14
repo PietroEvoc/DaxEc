@@ -109,8 +109,8 @@ STRIPE_SECRET=your_stripe_key
 JWT_SECRET=your_jwt_secret
 
 API Endpoints
-<img width="457" alt="image" src="https://github.com/user-attachments/assets/375331a6-292e-4ad5-aeaf-9e50746a5b93" />
-<img width="535" alt="image" src="https://github.com/user-attachments/assets/1f9aa04f-9bbe-4f3d-900d-244542f28a5b" />
+
+<img width="535" alt="image" src="https://github.com/user-attachments/assets/d6045649-838c-4883-9715-4fffc24d89df" />
 
 
 Authentication & Security
