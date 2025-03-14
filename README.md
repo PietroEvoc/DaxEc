@@ -1,70 +1,121 @@
-# Getting Started with Create React App
+DaxDudes E-Commerce Website
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+DaxDudes is an e-commerce platform built for artists to showcase, sell artwork, and handle custom commission requests. It offers a smooth shopping experience, secure payments, and an admin dashboard for managing products, orders, and customer interactions.
 
-## Available Scripts
+Live Demo
+https://dax-ec-ytjo.vercel.app/
 
-In the project directory, you can run:
+Features
 
-### `npm start`
+User Features
+	•	Browse and purchase artwork
+	•	View detailed product descriptions
+	•	Add/remove items from the shopping cart
+	•	Checkout securely using Stripe/PayPal
+	•	Request custom artwork commissions
+	•	User authentication (Register/Login)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Admin Features
+	•	Upload and manage artwork listings
+	•	Delete products from the shop
+	•	View and manage orders
+	•	Respond to customer messages and custom requests
+	•	Access admin dashboard with management tools
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Tech Stack
 
-### `npm test`
+Frontend:
+	•	React (with React Router)
+	•	Tailwind CSS (for styling)
+	•	Vercel (for deployment)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Backend:
+	•	Node.js + Express
+	•	MongoDB (Database)
+	•	Cloudinary (Image storage)
+	•	Joi & Helmet (Security)
 
-### `npm run build`
+Project Structure
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+📦 daxDudes
+ ┣ 📂 daxdudes-frontend (React Frontend)
+ ┃ ┣ 📂 src
+ ┃ ┃ ┣ 📂 components (All UI Components: Navbar, Shop, HeroSection, etc.)
+ ┃ ┃ ┣ 📂 context (State management)
+ ┃ ┃ ┣ 📜 App.js
+ ┃ ┃ ┣ 📜 index.js
+ ┃ ┃ ┣ 📜 index.css
+ ┃ ┃ ┗ 📂 assets (Images, icons, etc.)
+ ┃ ┣ 📜 tailwind.config.js
+ ┃ ┗ 📜 package.json
+ ┣ 📂 daxdudes-backend (Node.js Backend)
+ ┃ ┣ 📂 config (Database connection, environment variables)
+ ┃ ┣ 📂 controllers (Handles API logic)
+ ┃ ┣ 📂 middleware (Auth, validation, etc.)
+ ┃ ┣ 📂 models (User, Product, Cart, Admin, etc.)
+ ┃ ┣ 📂 routes (API routes)
+ ┃ ┃ ┣ 📜 admin.js
+ ┃ ┃ ┣ 📜 cartRoutes.js
+ ┃ ┃ ┣ 📜 messages.js
+ ┃ ┃ ┣ 📜 products.js
+ ┃ ┃ ┣ 📜 uploadRoute.js
+ ┃ ┃ ┗ 📜 users.js
+ ┃ ┣ 📂 utils (Helper functions)
+ ┃ ┣ 📜 server.js (Main backend entry point)
+ ┃ ┗ 📜 package.json
+ ┣ 📜 .env (Environment variables)
+ ┗ 📜 README.md
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Getting Started
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. Clone the Repository
 
-### `npm run eject`
+git clone https://github.com/your-username/DaxDudes.git
+cd DaxDudes
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+2. Backend Setup
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+cd daxdudes-backend
+npm install
+npm start
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+3. Frontend Setup
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+cd daxdudes-frontend
+npm install
+npm run dev
 
-## Learn More
+4. Environment Variables
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Create a .env file in the daxdudes-backend directory and add:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+MONGO_URI=your_mongodb_connection_string
+CLOUDINARY_URL=your_cloudinary_api_key
+STRIPE_SECRET=your_stripe_key
+JWT_SECRET=your_jwt_secret
 
-### Code Splitting
+API Endpoints
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Method	Endpoint	Description
+POST	/api/users/register	Register a new user
+POST	/api/users/login	Login and get a token
+GET	/api/products	Fetch all products
+GET	/api/products/:id	Get a single product by ID
+POST	/api/cart	Add an item to the cart
+GET	/api/cart	Get cart items
+DELETE	/api/cart/:id	Remove item from cart
+POST	/api/orders	Place an order
 
-### Analyzing the Bundle Size
+UI/UX Design
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+The frontend is styled with Tailwind CSS for a modern, sleek user experience. The homepage features a hero section, followed by a product gallery and a shop section. The admin dashboard provides easy access to manage the store.
 
-### Making a Progressive Web App
+Deployment
+	•	Frontend: Vercel
+	•	Backend: (To be added)
+	•	Database: MongoDB Atlas
+	•	Images: Cloudinary
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Contributing
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Feel free to open an issue or create a pull request to improve the project.
