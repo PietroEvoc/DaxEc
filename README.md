@@ -1,9 +1,19 @@
 DaxDudes E-Commerce Website
 
-DaxDudes is an e-commerce platform built for artists to showcase, sell artwork, and handle custom commission requests. It offers a smooth shopping experience, secure payments, and an admin dashboard for managing products, orders, and customer interactions.
+DaxDudes is an e-commerce platform designed for an independent artist to showcase and sell artwork, provide custom commissions, and connect directly with customers without relying on high-commission marketplaces.
 
 Live Demo
 https://dax-ec-ytjo.vercel.app/
+
+Project Overview
+
+Independent artists often struggle to reach a wider audience due to expensive commissions on generic marketplaces. DaxDudes solves this by providing an artist-first platform that enables:
+	•	A personalized online gallery and shop
+	•	Custom art requests through a streamlined contact form
+	•	A smooth shopping experience with secure payment options
+	•	Direct artist-customer interactions
+
+The platform is built with simplicity and an aesthetic that reflects the artist’s style.
 
 Features
 
@@ -22,7 +32,7 @@ Admin Features
 	•	Respond to customer messages and custom requests
 	•	Access admin dashboard with management tools
 
-Tech Stack
+Technology Stack
 
 Frontend:
 	•	React (with React Router)
@@ -35,12 +45,16 @@ Backend:
 	•	Cloudinary (Image storage)
 	•	Joi & Helmet (Security)
 
+Additional Services:
+	•	Stripe/PayPal (Payments)
+	•	JWT (User Authentication)
+
 Project Structure
 
 📦 daxDudes
  ┣ 📂 daxdudes-frontend (React Frontend)
  ┃ ┣ 📂 src
- ┃ ┃ ┣ 📂 components (All UI Components: Navbar, Shop, HeroSection, etc.)
+ ┃ ┃ ┣ 📂 components (Navbar, Shop, HeroSection, etc.)
  ┃ ┃ ┣ 📂 context (State management)
  ┃ ┃ ┣ 📜 App.js
  ┃ ┃ ┣ 📜 index.js
@@ -66,7 +80,7 @@ Project Structure
  ┣ 📜 .env (Environment variables)
  ┗ 📜 README.md
 
-Getting Started
+Setup & Installation
 
 1. Clone the Repository
 
@@ -83,7 +97,7 @@ npm start
 
 cd daxdudes-frontend
 npm install
-npm run dev
+npm start
 
 4. Environment Variables
 
@@ -96,26 +110,44 @@ JWT_SECRET=your_jwt_secret
 
 API Endpoints
 
-Method	Endpoint	Description
-POST	/api/users/register	Register a new user
-POST	/api/users/login	Login and get a token
-GET	/api/products	Fetch all products
-GET	/api/products/:id	Get a single product by ID
-POST	/api/cart	Add an item to the cart
-GET	/api/cart	Get cart items
-DELETE	/api/cart/:id	Remove item from cart
-POST	/api/orders	Place an order
+User Authentication
 
-UI/UX Design
+Method	Endpoint	Description	Authentication
+POST	/api/register	Register a new user	No
+POST	/api/login	Authenticate user	No
+GET	/api/user	Get user profile	Yes (JWT)
 
-The frontend is styled with Tailwind CSS for a modern, sleek user experience. The homepage features a hero section, followed by a product gallery and a shop section. The admin dashboard provides easy access to manage the store.
+Products
 
-Deployment
-	•	Frontend: Vercel
-	•	Backend: (To be added)
-	•	Database: MongoDB Atlas
-	•	Images: Cloudinary
+Method	Endpoint	Description	Authentication
+GET	/api/products	Get all products	No
+GET	/api/products/:id	Get a single product	No
+POST	/api/products	Add a new product (Admin)	Yes (Admin)
+PUT	/api/products/:id	Update product (Admin)	Yes (Admin)
+DELETE	/api/products/:id	Delete product (Admin)	Yes (Admin)
+
+Orders
+
+Method	Endpoint	Description	Authentication
+POST	/api/orders	Place a new order	Yes (JWT)
+GET	/api/orders/:id	Get order details	Yes (JWT)
+
+Custom Art Requests
+
+Method	Endpoint	Description	Authentication
+POST	/api/custom-art	Request a custom artwork	Yes (JWT)
+
+Authentication & Security
+	•	JWT (JSON Web Token) authentication for user security
+	•	Admin authentication required for product and order management
+	•	Data validation to prevent invalid inputs
+	•	Secure transactions with Stripe/PayPal
+
+Future Enhancements
+	•	Wishlist & Favorites: Users can save artworks to their favorites
+	•	User Reviews: Customers can leave reviews for purchased artwork
+	•	Order Tracking: Allow users to track the status of their orders
 
 Contributing
 
-Feel free to open an issue or create a pull request to improve the project.
+Contributions are welcome! Feel free to open an issue or create a pull request to improve the project.
