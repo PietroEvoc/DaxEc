@@ -109,33 +109,9 @@ STRIPE_SECRET=your_stripe_key
 JWT_SECRET=your_jwt_secret
 
 API Endpoints
+<img width="457" alt="image" src="https://github.com/user-attachments/assets/375331a6-292e-4ad5-aeaf-9e50746a5b93" />
+<img width="535" alt="image" src="https://github.com/user-attachments/assets/1f9aa04f-9bbe-4f3d-900d-244542f28a5b" />
 
-User Authentication
-
-Method	Endpoint	Description	Authentication
-POST	/api/register	Register a new user	No
-POST	/api/login	Authenticate user	No
-GET	/api/user	Get user profile	Yes (JWT)
-
-Products
-
-Method	Endpoint	Description	Authentication
-GET	/api/products	Get all products	No
-GET	/api/products/:id	Get a single product	No
-POST	/api/products	Add a new product (Admin)	Yes (Admin)
-PUT	/api/products/:id	Update product (Admin)	Yes (Admin)
-DELETE	/api/products/:id	Delete product (Admin)	Yes (Admin)
-
-Orders
-
-Method	Endpoint	Description	Authentication
-POST	/api/orders	Place a new order	Yes (JWT)
-GET	/api/orders/:id	Get order details	Yes (JWT)
-
-Custom Art Requests
-
-Method	Endpoint	Description	Authentication
-POST	/api/custom-art	Request a custom artwork	Yes (JWT)
 
 Authentication & Security
 	•	JWT (JSON Web Token) authentication for user security
